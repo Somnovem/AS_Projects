@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             {true, true, true, true, false, true, true}
     };
 
-    private ArrayList<Button> segments = new ArrayList<>();
+    private ArrayList<Button> segments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         Button btnF = findViewById(R.id.btnF);
         Button btnG = findViewById(R.id.btnG);
 
+        segments = new ArrayList<>();
+
         segments.add(btnA);
         segments.add(btnB);
         segments.add(btnC);
@@ -51,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         segments.add(btnG);
 
         setDigit(9);
-        int delayCounter = 2;
         for (int i = 9; i >= 0; i--) {
             Handler handler = new Handler();
             int finalI = i;
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     setDigit(finalI);
                 }
-            }, 1000L *delayCounter++);
+            }, 1000L * (9 - i) + 1000);
         }
     }
 
