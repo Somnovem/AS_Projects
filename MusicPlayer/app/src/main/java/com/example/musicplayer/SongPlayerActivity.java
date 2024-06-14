@@ -39,6 +39,7 @@ public class SongPlayerActivity extends AppCompatActivity {
     private TextView songTitleTextView;
     private TextView songArtistTextView;
     private ImageButton btnPlayPause;
+    private ImageButton btnLoop;
     private SeekBar seekBar;
     private TextView currentTimeText;
     private TextView songDurationText;
@@ -91,6 +92,7 @@ public class SongPlayerActivity extends AppCompatActivity {
         songArtistTextView = findViewById(R.id.artist_name);
         ImageButton btnPrevious = findViewById(R.id.btn_previous);
         btnPlayPause = findViewById(R.id.btn_play_pause);
+        btnLoop = findViewById(R.id.btn_loop);
         ImageButton btnNext = findViewById(R.id.btn_next);
         seekBar = findViewById(R.id.seek_bar);
         currentTimeText = findViewById(R.id.current_time_text);
@@ -98,6 +100,7 @@ public class SongPlayerActivity extends AppCompatActivity {
 
         btnPrevious.setOnClickListener(v -> previousSong());
         btnPlayPause.setOnClickListener(v -> togglePlayPause());
+        btnLoop.setOnClickListener(v -> toggleLooping());
         btnNext.setOnClickListener(v -> nextSong());
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -259,6 +262,19 @@ public class SongPlayerActivity extends AppCompatActivity {
                 showNotification(playlist.get(currentIndex), true);
             }
             isPlaying = !isPlaying;
+        }
+    }
+
+    private void toggleLooping() {
+        if (mediaPlayer != null) {
+            if (mediaPlayer.isLooping()) {
+                mediaPlayer.setLooping(false);
+                btnLoop.setImageResource(R.drawable.ic_no_loop);
+            }
+            else {
+                mediaPlayer.setLooping(true);
+                btnLoop.setImageResource(R.drawable.ic_loop);
+            }
         }
     }
 
